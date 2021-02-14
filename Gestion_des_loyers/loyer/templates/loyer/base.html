@@ -1,9 +1,14 @@
+<!-- templates/base.html -->
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Home</title>
+  <meta charset="utf-8">
+  <title>{% block title %}Gestion des Loyers {% endblock %}</title>
 </head>
 <body>
-	<p>Welcome to our Rent management Web Application</p>
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
 </body>
 </html>
