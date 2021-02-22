@@ -565,35 +565,6 @@ header {
 
 
 
-@media only screen and (max-device-width: 767px) {
-    .login-logo img {
-        margin: 0 auto;
-    }
-    .login-details .nav-tabs > li {
-        text-align: center;
-        width: 50%;
-    }
-    .login-signup .login-inner h1 {
-        font-size: 26px;
-        margin-bottom: 0;
-        margin-top: 10px;
-    }
-    .login-inner .login-form input {
-        font-size: 15px;
-        max-width: 100%;
-        padding: 15px 45px;
-    }
-    .login-inner .form-details {
-        padding: 25px;
-    }
-    .login-inner .login-form label {
-        margin-bottom: 20px;
-        width: 100%;
-    }
-    .login-inner .form-btn {
-        margin: 0;
-        max-width: 180px;
-    }
     .tab-content .tab-pane {
         padding: 20px 0;
     }
