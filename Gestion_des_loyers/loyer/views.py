@@ -3,7 +3,6 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import login as auth_login ,authenticate,logout
 
 from .models import *
-from .forms import *
 
 def login(request):
 
