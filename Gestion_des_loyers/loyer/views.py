@@ -21,6 +21,24 @@ def login(request):
 	context = {}
 	return render(request,'loyer/login.html',context)
 
+
+def logout(request):
+	pass
+
 def home(request):
 	context = {}
 	return render(request,'loyer/index.html',context)
+
+
+def office(request):
+	context = {}
+	return render(request,'loyer/office.html',context)
+
+
+def tenant(request):
+	context = {}
+	return render(request,'loyer/tenant.html',context)
+
+def calendar(request):
+	context = {}
+	return render(request,'loyer/calendar.html',context)
