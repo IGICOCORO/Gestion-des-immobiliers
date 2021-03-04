@@ -230,15 +230,6 @@ li,ul{
     width: 100%;
 }
 
-.add-project {
-    background: #5584ff none repeat scroll 0 0;
-    border-radius: 100px;
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 600;
-    padding: 10px 27px 10px 45px;
-    position: relative;
-}
 
 .header-rightside .nav > li > a:focus,
 .header-rightside .nav > li > a:hover {
@@ -246,20 +237,6 @@ li,ul{
     text-decoration: none;
 }
 
-.add-project::before {
-    background: rgba(0, 0, 0, 0) url("../images/plus.png") no-repeat scroll 0 0;
-    content: "";
-    ;
-    height: 12px;
-    left: 17px;
-    position: absolute;
-    top: 12px;
-    width: 12px;
-}
-
-.add-project:hover {
-    color: #ffffff;
-}
 
 .header-top i {
     color: #0e1a35;
@@ -330,6 +307,7 @@ li,ul{
     font-size: 15px;
     padding: 15px 9px;
     width: 100%;
+    border: 1px;
     background: rgba(0, 0, 0, 0) url("../images/search.png") no-repeat scroll 99% 12px;
     color: #8492af;
 }
@@ -490,80 +468,7 @@ header {
 .shield-buttons {
     display: none;
 }
-.close, .close:focus, .close:hover {
-    color: #fff;;
-    opacity: 1;
-    text-shadow: none;
-}
-.modal-body input {
-    border: 1px solid #d4d9e3;
-    font-size: 14px;
-    font-weight: 300;
-    margin: 5px 0;
-    padding: 14px 10px;
-    width: 100%;
-    color: #8492af;
-}
-.modal-body textarea {
-    border: 1px solid #d4d9e3;
-    font-size: 14px;
-    font-weight: 300;
-    height: 200px;
-    margin-top: 5px;
-    padding: 9px 10px;
-    width: 100%;
-    color: #8492af;
-}
-.modal-header.login-header h4 {
-    color: #ffffff;
-}
-.modal-footer .add-project {
-    background: #5584ff none repeat scroll 0 0;
-    border: medium none;
-    border-radius: 100px;
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 600;
-    padding: 10px 30px;
-    position: relative;
-}
-.modal-footer .add-project::before{display: none;}
-.modal-footer {
-    border: 0 none;
-    padding: 10px 15px 26px;
-    text-align: right;
-}
-.cancel {
-    background: #0E1A35     ;
-    border: medium none;
-    border-radius: 100px;
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 600;
-    padding: 10px 30px;
-    position: relative;
-    
-}
-.modal{
-    top: 20%; 
-}
-.modal-header .close {
-    margin-top: 2px;
-}
-.search input:focus{
-    border-bottom: 1px solid #BDC4D4;
-    line-height:22px;
-    transition: 0.1s all;
-}
-.modal-header.login-header {
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
 /*Main CSS*/
-
-
-
-
-
 
     .tab-content .tab-pane {
         padding: 20px 0;
