@@ -1,4 +1,3 @@
-<!-- templates/loyer/base.html -->
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -6,57 +5,60 @@
   <meta charset="utf-8">
   <title>{% block title %}Gestion des Loyers {% endblock %}</title>
       <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
-   <!-- Font Awesome -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+ <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+        
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+ <link rel="stylesheet" href="{% static 'css_side/style.css' %}">
+
+  <script src="{% static 'js_side/jquery.min.js' %}"></script>
+    <script src="{% static 'js_side/popper.js' %}"></script>
+    <script src="{% static 'js_side/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js_side/main.js' %}"></script>
 </head>
     {% block Dashboard %}
-    <div class="container-fluid display-table">
-        <div class="row display-table-row">
-            <div class="col-md-2 col-sm-1 hidden-xs display-table-cell v-align box" id="navigation">
-                <div class="logo">
-                    <a href="{% url "home" %}">
-                        <h2>Rental house</h2>
-                    </a>
-                </div>
-                <div class="navi">
-                    <ul>
-                        <li class="active"><a href="{% url "home" %}"><i class="fa fa-tachometer" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Dashboard</span></a></li>
-                        <li><a href="{% url "office" %}"><i class="fa fa-building" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Office</span></a></li>
-                        <li><a href="{% url "tenant" %}"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Tenant</span></a></li>
-                        <li><a href="{% url "calendar" %}"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Calendar</span></a></li>
-                        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>                    </ul>
+    
+        <div class="wrapper d-flex align-items-stretch h-100">
+            <nav id="sidebar">
+                <div class="custom-menu">
+                    <button type="button" id="sidebarCollapse" class="btn btn-primary">
+            </button>
+        </div>
+            <div class="img bg-wrap text-center py-4" style="background-image: url({% static 'images_side/bg_1.jpg' %});">
+                <div class="user-logo">
+                    <div class="img" style="background-image: url({% static 'images_side/logo.jpg' %});">
+            </div>
+                    <h3>Gestion des Loyers</h3>
                 </div>
             </div>
-            <div class="col-md-10 col-sm-11 display-table-cell v-align">
-                <!--<button type="button" class="slide-toggle">Slide Toggle</button> -->
-                <div class="row">
-                    <header>
-                        <div class="col-md-7">
-                    
-                            <div class="search hidden-xs hidden-sm">
-                                <input type="text" placeholder="Search" id="search">
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="header-rightside">
-                                <ul class="list-inline header-top pull-right">
-                                	<li><h4>{{request.user.username}}</h4></li> 
-                                	
-                                	<li class="dropdown">
-                                       <a href="#" class="fa fa-power-off" style="font-size: 25px;"></a>
-                                        </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </header>
-                </div>
-                {% block content %}
+        <ul class="list-unstyled components mb-5">
+          <li class="active">
+            <a href="{% url 'home' %}"><span class="fa fa-tachometer mr-3"></span> Dahboard</a>
+          </li>
+          <li>
+              <a href="{% url 'calendar' %}"><span class="fa fa-calendar mr-3 notif"></span> Calendar</a>
+          </li>
+          <li>
+            <a href="{% url 'office' %}"><span class="fa fa-building mr-3"></span> Office</a>
+          </li>
+          <li>
+            <a href="{% url 'tenant' %}"><span class="fa fa-users mr-3"></span> Tenant</a>
+          </li>
+          <li>
+            <a href="{% url 'login' %} "><span class="fa fa-sign-out mr-3"></span> Sign Out</a>
+          </li>
+        </ul>
 
-               {% endblock content %}
+        </nav>
+        </div>
+        <div class="align-content-between">
+            {% block content %}
+
+            {% endblock content %}
+            
+        </div>
+                
             </div>
         </div>
 
