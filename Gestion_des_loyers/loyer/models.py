@@ -12,7 +12,7 @@ class Paiement(models.Model):
 		return  {self.montant_payé}
 
 class Bureau(models.Model):
-	num = models.CharField(max_length=40)
+	num = models.PositiveIntegerField(default=1)
 	prix = models.PositiveIntegerField()
 	disponible = models.BooleanField()
 
@@ -39,6 +39,7 @@ class Locataire(models.Model):
 	user = models.OneToOneField(User,on_delete= models.CASCADE)
 	bureau = models.OneToOneField(Bureau,on_delete= models.CASCADE)
 	tel = models.PositiveIntegerField()
+	contrat = models.FileField()
 
 
 	def __str__(self):
