@@ -10,12 +10,12 @@
  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
         
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
- <link rel="stylesheet" href="{% static 'css_side/style.css' %}">
+ <link rel="stylesheet" href="{% static 'css/sidebar/style.css' %}">
 
-  <script src="{% static 'js_side/jquery.min.js' %}"></script>
-    <script src="{% static 'js_side/popper.js' %}"></script>
-    <script src="{% static 'js_side/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js_side/main.js' %}"></script>
+  <script src="{% static 'js/sidebar/jquery.min.js' %}"></script>
+    <script src="{% static 'js/sidebar/popper.js' %}"></script>
+    <script src="{% static 'js/sidebar/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/sidebar/main.js' %}"></script>
 </head>
     {% block Dashboard %}
     
@@ -25,9 +25,9 @@
                     <button type="button" id="sidebarCollapse" class="btn btn-primary">
             </button>
         </div>
-            <div class="img bg-wrap text-center py-4" style="background-image: url({% static 'images_side/bg_1.jpg' %});">
+            <div class="img bg-wrap text-center py-4" style="background-image: url({% static 'images/sidebar/bg_1.jpg' %});">
                 <div class="user-logo">
-                    <div class="img" style="background-image: url({% static 'images_side/logo.jpg' %});">
+                    <div class="img" style="background-image: url({% static 'images/sidebar/bg.jpg' %});">
             </div>
                     <h3>Gestion des Loyers</h3>
                 </div>
@@ -52,16 +52,12 @@
 
         </nav>
         </div>
-        <div class="align-content-between">
+        <div id="content" class="p-4 p-md-5 pt-5">
             {% block content %}
 
             {% endblock content %}
             
         </div>
-                
-            </div>
-        </div>
-
-    </div>
+              
     {% endblock %}
 </html>
