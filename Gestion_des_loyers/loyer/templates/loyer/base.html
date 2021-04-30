@@ -19,12 +19,11 @@
 </head>
     {% block Dashboard %}
     
-        <div class="wrapper d-flex align-items-stretch h-100">
+        <div class="wrapper d-flex align-items-stretch " style="height: 100%;">
             <nav id="sidebar">
                 <div class="custom-menu">
-                    <button type="button" id="sidebarCollapse" class="btn btn-primary">
-            </button>
-        </div>
+                    <button type="button" id="sidebarCollapse" class="btn btn-primary"></button>
+              </div>
             <div class="img bg-wrap text-center py-4" style="background-image: url({% static 'images/sidebar/bg_1.jpg' %});">
                 <div class="user-logo">
                     <div class="img" style="background-image: url({% static 'images/sidebar/bg.jpg' %});">
@@ -34,7 +33,7 @@
             </div>
         <ul class="list-unstyled components mb-5">
           <li class="active">
-            <a href="{% url 'home' %}"><span class="fa fa-tachometer mr-3"></span> Dahboard</a>
+            <a href="{% url 'home' %}"><span class="fa fa-tachometer mr-3"></span> Dashboard</a>
           </li>
           <li>
               <a href="{% url 'calendar' %}"><span class="fa fa-calendar mr-3 notif"></span> Calendar</a>
@@ -52,7 +51,7 @@
 
         </nav>
         </div>
-        <div id="content" class="p-4 p-md-5 pt-5">
+        <div id="content" class="">
             {% block content %}
 
             {% endblock content %}
