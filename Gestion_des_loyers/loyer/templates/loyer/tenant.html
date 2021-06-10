@@ -1,59 +1,45 @@
 {% extends 'loyer/base.html' %}
 
 {% block title %} Tenant {% endblock %}
-
+{% load humanize %}
 {% block content %} 
-<div>
-	<div class="btn_panier">
-		<button type="button" class="btn btn-primary btn-rounded">Ajouter</button>
-	</div> <br><br>
+<div class="container">
+    <button type="button" class="btn btn-primary btn-rounded" style="float: right;"><a href="{% url 'tenant_new' %}"><span class="fa fa-users mr-3"></span> Ajouter</a></button>
+        <center>
+        <h2>Mes locataires</h2><br>      
+      </center>
+  <div class="btn_panier">
 	<div class="container">
   <div class="row">
     <div class="col-12">
       <table class="table table-bordered">
         <thead>
-          <tr>
-            <th scope="col">Day</th>
-            <th scope="col">Article Name</th>
-            <th scope="col">Author</th>
-            <th scope="col">Shares</th>
+          <tr style="background-color: antiquewhite;">
+            <th scope="col">Tenant</th>
+            <!-- <th scope="col">Fin</th> -->
+            <th scope="col">Contact</th>
+            <th scope="col">Adresse</th>
+            <!-- <th scope="col">Mounth</th> -->
             <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
+          {% for tenant in tenants %}
           <tr>
-            <th scope="row">1</th>
-            <td>Bootstrap 4 CDN and Starter Template</td>
-            <td>Cristina</td>
-            <td>2.846</td>
+            <td>{{tenant.first_name}} {{tenant.last_name}}</td>
+            <!-- <td>{{tenant.office.num }}</td> -->
+            <td>{{tenant.phone }}</td>
+            <!-- <td>{{tenant.end_rent_date}}</td> -->
+            <td>{{tenant.address}}</td>
+            <!-- <td>{{tenant.amount_inadvance|intcomma}}</td> -->
+            <!-- <td>{{tenant.Paid_for_mounths|length}}</td> -->
             <td>
-              <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-              <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-            <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+              <button type="button" class="btn btn-primary"><i class="fas fa-eye"></i></button>
+              <button type="button" class="btn btn-success"><a href="/edit_tenant/{{tenant.id}}"><i class="fas fa-edit"></i></a></button>
+              <button type="button" class="btn btn-success"><a href="/delete_tenant/{{ tenant.id }}"><i class="fas fa-trash-alt"></i></a></button>
             </td>
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Bootstrap Grid 4 Tutorial and Examples</td>
-            <td>Cristina</td>
-            <td>3.417</td>
-            <td>
-              <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-              <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-            <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Bootstrap Flexbox Tutorial and Examples</td>
-            <td>Cristina</td>
-            <td>1.234</td>
-            <td>
-              <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-              <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-            <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-            </td>
-          </tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>

@@ -1,51 +1,45 @@
 {% extends 'loyer/base.html' %}
-
+{% load humanize %}
 {% block title %} Office {% endblock %}
-
+{% load static %}
 {% block content %} 
 <div class="container">
+		<button type="button" class="btn btn-primary btn-rounded" style="float: right;"><a href="{% url 'office_new' %}"><span class="fa fa-users mr-3"></span> Ajouter</a></button>
+	<center><h1>All offices</h1></center>
 	<div class="btn_panier">
-		<button type="button" class="btn btn-primary btn-rounded">Ajouter</button>
-	</div> <br><br>
+	</div>
   <div class="row">
     <div class="col-12">
-		<table class="table table-image">
+		<table class="table table-image"  >
 		  <thead>
-		    <tr>
-		      <th scope="col">Day</th>
+		    <tr style="background-color: antiquewhite;">
+		      <th scope="col">Number</th>
 		      <th scope="col">Image</th>
-		      <th scope="col">Article Name</th>
-		      <th scope="col">Author</th>
-		      <th scope="col">Words</th>
-		      <th scope="col">Rent</th>
-		      <th scope="col">Shares</th>
+		      <th scope="col">Image1</th>
+		      <th scope="col">Image2</th>
+		      <!-- <th scope="col">Renter</th> -->
+		      <th scope="col">Ammount</th>
+		      <th scope="col">Action</th>
 		    </tr>
 		  </thead>
 		  <tbody>
+		  	{% for office  in offices %}
 		    <tr>
-		      <th scope="row">1</th>
-		      <td class="w-25">
-			      <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-3.jpg" class="img-fluid img-thumbnail" alt="Sheep" width="50%;">
-		      </td>
-		      <td>Bootstrap 4 CDN and Starter Template</td>
-		      <td>Cristina</td>
-		      <td>913</td>
-		      <td><div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" /></div></td>
-		      <td>2.846</td>
-		    </tr>
-		    <tr>
-		      <th scope="row">2</th>
-		      <td class="w-25">
-			      <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-5.jpg" class="img-fluid img-thumbnail" alt="Sheep" width="50%";>
-		      </td>
-		      <td>Bootstrap Grid 4 Tutorial and Examples</td>
-		      <td>Cristina</td>
-		      <td>1.434</td>
-		      <td><div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" /></div></td>
-		      <td>3.417</td>
-		    </tr>
+		      <th scope="row">{{office.num}}</th>
+		      <th scope="row"><img class="img" src="{% static office.picture.url %}" alt="office room" height="50px" width="50px"></th>
+		      <td><img class="img" src="{% static office.picture1.url %}" alt="office room" height="50px" width="50px"></td>
+		      <td><img class="img" src="{% static office.picture2.url %}" alt="office room" height="50px" width="50px"></td>
+		      <!-- <td>{{tenant.user.first_name}} {{tenant.user.last_name}}</td>		       -->
+		      <!-- <td>{{office.rent_amount|intcomma}}</td> -->
+		      <th scope="row">{{office.rent_amount|intcomma}}</th>
+		      <!-- <td>{{office.is_available}}</td> -->
+		      <td>
+              <button type="button" class="btn btn-primary"><a href="/office_detail/{{office.id}}"><i class="fas fa-eye"></i></a></button>
+              <button type="button" class="btn btn-success"><a href="/edit_office/{{office.id}}"><i class="fas fa-edit"></i></a></button>
+              <button type="button" class="btn btn-danger"><a href="/delete_office/{{ office.id }}"><i class="fas fa-trash-alt"></i></a></button>
+          </td>
+   		    </tr>
+		    {% endfor %}
 		  </tbody>
 		</table>   
     </div>
