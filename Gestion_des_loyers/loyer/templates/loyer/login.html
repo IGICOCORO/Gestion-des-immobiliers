@@ -1,54 +1,56 @@
 {% load static %}
+{% load crispy_forms_tags %}
+
 <!doctype html>
 <html lang="en">
   <head>
-  	<title>Login</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-	<link href="https://fonts.googleapis.com/css?family=Verdana, Arial, Helvetica, sans-serif;:300,400,700&display=swap" rel="stylesheet">
-
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	
-	<link rel="stylesheet" href="{% static '/css/style.css' %}">
-
-	</head>
-	<body class="img js-fullheight" style="background-image: url({% static '/images/bg.jpg' %});">
-	<section class="ftco-section">
-		<div class="container mt-5">
-			<div class="row justify-content-center">
-				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">Login</h2>
-				</div>
-			</div>
-			<div class="row justify-content-center">
-				<div class="col-md-6 col-lg-4">
-					<div class="login-wrap p-0">
-		      	<form action="#" class="signin-form" method="POST">
-		      		{% csrf_token %}
-		      		<div class="form-group">
-		      			<input type="text" class="form-control" name="username" placeholder="Username" required>
-		      		</div>
-	            <div class="form-group">
-	              <input id="password-field" type="password" class="form-control" name="password" placeholder="Password" required>
-	              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
-	            </div>
-	            <div class="form-group">
-	            	<button type="submit" class="form-control {% url "home" %} btn btn-primary submit px-3">Login</button>
-	            </div>
-	           
-	          </form>	         
-		      </div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<script src="{% static 'js/jquery.min.js' %}"></script>
-  <script src="{% static 'js/popper.js' %}"></script
-  <script src="{% static 'js/bootstrap.min.js' %}"></script>
-  <script src="{% static 'js/main.js' %} "></script>
-
-	</body>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<title>Login page</title>
+<style>
+	body {
+  margin: 0;
+  padding: 0;
+  background-color: #17a2b8;
+  height: 100vh;
+}
+#login .container #login-row #login-column #login-box {
+  margin-top: 120px;
+  max-width: 600px;
+  height: 320px;
+  border: 1px solid #9C9C9C;
+  background-color: #EAEAEA;
+}
+#login .container #login-row #login-column #login-box #login-form {
+  padding: 10px;
+}
+#login .container #login-row #login-column #login-box #login-form #register-link {
+  margin-top: 85px;
+}
+</style>
+<body>
+    <div id="login">
+        <h1 class="text-center text-white pt-8">Login form</h1>
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12"><br><br><br><br><br>
+                        <form id="login-form" class="form" action="" method="post">
+                            <strong>
+                                {% csrf_token %}
+                                {{ login_form|crispy }}                                        
+                            </strong>
+                        <center>
+                        <button class="btn btn-primary" type="submit">Login</button>
+                        </center>
+                            
+                      </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 </html>
-
