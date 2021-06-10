@@ -1,43 +1,28 @@
 from django.contrib import admin
 from .models import *
 
-@admin.register(Paiement)
-class PaiementAdmin(admin.ModelAdmin):
-	list_display = "montant_payé",
-	list_filter = "montant_payé",
-	search_field = "montant_payé", 
-	ordering = "montant_payé", 
 
-	select_related = True
-
-@admin.register(Bureau)
-class BureauAdmin(admin.ModelAdmin):
-	list_display = "num", "prix"
-	list_filter = "num", "prix"
-	search_field = "num", "prix"
-	ordering = "num", "prix"
-
-@admin.register(Immeuble)
-class ImmeubleAdmin(admin.ModelAdmin):
-	list_display = "address", "bureau"
-	list_filter = "address", "bureau",
-	search_field = "address", "bureau"
-	ordering = "address", "bureau"
-
-	select_related = True
-
-@admin.register(Proprietaire)
+    
 class ProprietaireAdmin(admin.ModelAdmin):
-	list_display = "tel", "user"
-	list_filter = "tel", "user"
-	search_field = "tel", "user"
-	ordering = "tel",
+    fields = ['user', 'tel', 'address']
+admin.site.register(Proprietaire, ProprietaireAdmin)
 
-@admin.register(Locataire)
+
+class ImmeubleAdmin(admin.ModelAdmin):
+    fields = ['Proprietaire', 'address', 'nbre_bureau']
+admin.site.register(Immeuble, ImmeubleAdmin)
+
+class OfficeAdmin(admin.ModelAdmin):
+    pass
+
+    # fields = ['num', 'picture', 'rent_amount', 'is_available', 'price']
+admin.site.register(Office, OfficeAdmin)
+
 class LocataireAdmin(admin.ModelAdmin):
-	list_display = "tel", "user"
-	list_filter = "tel","user" 
-	search_field = "tel", "user"
-	ordering = "tel", 
-
-	select_related = True
+    pass
+    # fields = ['user', 'office', 'start_rent_date', 'end_rent_date', 'deposit_by_renter', 'pay_inadvance', 'amount_inadvance', 'Paid_for_mounths']
+admin.site.register(Locataire, LocataireAdmin)
+class CalenderAdmin(admin.ModelAdmin):
+    pass
+    # fields = ['user', 'office', 'start_rent_date', 'end_rent_date', 'deposit_by_renter', 'pay_inadvance', 'amount_inadvance', 'Paid_for_mounths']
+admin.site.register(Calender, CalenderAdmin)
