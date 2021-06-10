@@ -1,46 +1,48 @@
 {% extends 'loyer/base.html' %}
 
 {% block title %} Dashboard {% endblock %}
+{% load static %}
+{% load humanize %}
+{% block content %}
 
-     {% block content %}
-                <div class="user-dashboard">
-                    <h1>Welcome to the Rental House management system</h1>
-                    <div class="row">
-                        <div class="col-md-5 col-sm-5 col-xs-12 gutter">
-
-                            <div class="sales">
-                                <h2>Your Sale</h2>
-
-                                <div class="btn-group">
-                                    <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span>Period:</span> Last Year
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a href="#">2012</a>
-                                        <a href="#">2014</a>
-                                        <a href="#">2015</a>
-                                        <a href="#">2016</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-7 col-sm-7 col-xs-12 gutter">
-
-                            <div class="sales report">
-                                <h2>Report</h2>
-                                <div class="btn-group">
-                                    <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span>Period:</span> Last Year
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a href="#">2012</a>
-                                        <a href="#">2014</a>
-                                        <a href="#">2015</a>
-                                        <a href="#">2016</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+  <section id="listings" class="py-4">
+    <div class="container">
+      <div class="row">
+        {% if listing %}
+            {% for list in listing %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                  <div class="card listing-preview">
+                    <img class="img" src="{% static list.picture.url %}" alt="office room" height="290px" width="290px">
+                    <div class="card-img-overlay">
+                      <h2>
+                        <span class="badge badge-secondary text-white">{{ list.rent_amount|intcomma }} Fbu</span>
+                      </h2>
                     </div>
+                    <div class="card-body">
+                      <div class="list-heading text-center">
+                        <h4 class="text-primary">{{ list.title }}</h4>
+                        <hr>
+                        <p>
+                          <i class="fas fa-user text-secondary"></i> {{ list.immeuble }}
+                        </p>
+                      </div>
+                      <hr>
+                      <div class="row text-secondary pb-2">
+                        <div class="col-6">
+                          <i class="fas fa-clock"></i> {{ list.Houseownerjoinedthesite|timesince }} ago</div>
+                      </div>
+                      <hr>
+                      <a href="{% url 'tenant_new' %}" class="btn btn-primary btn-block">More Info</a>
+                    </div>
+                  </div>
                 </div>
-  {% endblock content %}
+            {% endfor %}
+        {% else %}
+            <div class="col-md-12">
+                <h4>No listsing available</h4>
+            </div>
+        {% endif %}
+      </div>
+
+
+{% endblock content %}
