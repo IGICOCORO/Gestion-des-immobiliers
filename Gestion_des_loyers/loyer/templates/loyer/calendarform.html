@@ -1,0 +1,21 @@
+{% extends 'loyer/base.html' %}
+{% load humanize %}
+{% block title %} Office {% endblock %}
+{% load static %}
+
+{% block content %}
+<body>
+	<center>
+		<div class="container">
+				<h1 class="display-50" style="background-color:#FFFF;">Upload Your Calendar</h1>
+				<form method ='POST'enctype="multipart/form-data">
+					{%csrf_token %}
+					<table class = 'w-50 table table-light' style="border-radius:10px;background-color:#FFFF;">
+						<strong>{{ form}}</strong>
+					</table>
+					<button type="submit" class="btn btn-lg btn-success">Submit</button>
+				</form>
+		</div>
+	</center>
+</body>
+{% endblock %}

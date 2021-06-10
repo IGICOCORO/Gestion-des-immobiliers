@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %} {{ inscription }} {% endblock %}
+
+{% block content %}
+<body>
+	<h1 class="display-4" style="background-color:#000000;color:#FFFF99;">Hello {{user.username}}</h1>
+	<center>
+		<h1 class="display-5" style="background-color:#000000;color:#FFFF99;">Delete Your Article</h1>
+		<form action="" method="POST" class="mt-3">
+			{% csrf_token %}
+			<h3>Are you sure you want to delete {{ post }}?</h3>
+			<input type="submit" class="btn btn-danger" value="Submit" />
+			<a href="{% url 'post_view' post.pk %}" class="btn btn-outline-primary float right' ">Cancel</a>
+		</form> 
+	</center>
+</body>
+{% endblock %}
