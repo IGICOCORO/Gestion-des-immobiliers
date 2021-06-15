@@ -23,14 +23,14 @@ class NewUserForm(UserCreationForm):
 class OfficeForm(forms.ModelForm):
 	class Meta:
 		model = Office
-		fields = ('immeuble','num', 'picture','picture1','picture2', 'rent_amount','is_available')
+		fields = ('immeuble','num', 'picture','picture1','picture2', 'rent_amount','bordereaU','is_available')
 		
 
 
 class LocataireForm(forms.ModelForm):
 	class Meta:
 		model = Locataire
-		fields = ('first_name','last_name', 'phone', 'address')
+		fields = ('first_name','last_name', 'phone', 'address','contract')
 		
 
 
