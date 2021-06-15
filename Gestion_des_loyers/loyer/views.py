@@ -1,5 +1,4 @@
-from django.urls import reverse_lazy
-from django.shortcuts import  render, redirect, reverse, get_object_or_404
+from django.shortcuts import  render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout 
 from django.contrib.auth import login as auth_login ,authenticate,logout
@@ -7,6 +6,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from    .forms  import *
 from .models import *
+# new features
+from django.db.models import Q
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 
 def register_request(request):
@@ -46,9 +49,19 @@ def logout_request(request):
 
 
 def home(request):
-	listing = Office.objects.all()
-	context = { 'listing': listing}
-	return render(request,'loyer/index.html',context)
+	all = Office.objects.filter(is_available=True)
+	# context = { 'all': all}
+	page = request.GET.get('page', 1)
+
+	paginator = Paginator(all, 9)
+	try:
+		listing = paginator.page(page)
+	except PageNotAnInteger:
+		listing = paginator.page(1)
+	except EmptyPage:
+		listing = paginator.page(paginator.num_pages)
+
+	return render(request,'loyer/index.html',{ 'listing': listing })
 
 
 def office(request):
@@ -59,13 +72,29 @@ def office(request):
 
 
 def tenant(request):
-	tenants = Locataire.objects.all()
-	context = { 'tenants': tenants}
-	return render(request,'loyer/tenant.html',context)
+	# tenants = Locataire.objects.all()
+	# context = { 'tenants': tenants}
+	search_post = request.GET.get('search')
+
+	if search_post:
+		tenants =Locataire.objects.filter(Q(first_name__icontains=search_post) or Q(last_name__icontains=search_post))
+		context = { 'tenants': tenants}
+	else:
+	# If not searched, return default tenants
+		tenants =Locataire.objects.all()#.order_by("-date_created")
+		context = { 'tenants': tenants}
+	return render(request,'loyer/tenant.html', context)
+
 
 def calendar(request):
-	calender = Calender.objects.all()
-	context = { 'calender': calender}
+	search_post = request.GET.get('search')
+	if search_post:
+		tenants =calender = Calender.objects.filter(Q(start_rent_date__icontains=search_post))
+		context = { 'calender': calender}
+	else:
+	# If not searched, return default tenants
+		tenants =calender = Calender.objects.all()#.order_by("-date_created")
+		context = { 'calender': calender}
 	return render(request,'loyer/calendar.html',context)
 
 
@@ -160,4 +189,22 @@ def  calender_destroy(request, id):
 	post = Calender.objects.get(id=id)  
 	post.delete()  
 	return redirect("/calendar")  
+
+def search_view(request):
+	# whatever user write in search box we get in query
+	query = request.GET['query']
+	offices=Office.objects.all().filter(first_name__icontains=query, last_name__icontains=query)
+	if 'office_ids' in request.COOKIES:
+		office_ids = request.COOKIES['office_ids']
+		counter=office_ids.split('|')
+		product_count_in_cart=len(set(counter))
+	else:
+		product_count_in_cart=0
+
+	# word variable will be shown in html when user click on search button
+	word="Searched Result :"
+
+	if request.user.is_authenticated:
+		return render(request,'loyer/tenant.html',{'offices':offices,'word':word,'product_count_in_cart':product_count_in_cart})
+	return render(request,'loyer/tenant.html',{'offices':offices,'word':word,'product_count_in_cart':product_count_in_cart})
 
