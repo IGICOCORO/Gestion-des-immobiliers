@@ -36,7 +36,22 @@
         <div class="container">
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">
+
+                  {% if messages %}
+                    {% for message in messages %}
+                      {% if message.tags == "error"%}
+                      <div class="alert alert-danger">
+                        {{ message }}
+                      </div>
+                      {% else %}
+                      <div class="alert alert-success">
+                        {{ message }}
+                      </div>
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
                     <div id="login-box" class="col-md-12"><br><br><br><br><br>
+                        <!-- {{messages}} -->
                         <form id="login-form" class="form" action="" method="post">
                             <strong>
                                 {% csrf_token %}

@@ -4,15 +4,22 @@
 
 {% block content %} 
 <div class="container">
-    <button type="button" class="btn btn-primary btn-rounded" style="float: right;"><a href="{% url 'calender_new' %}"><span class="fa fa-users mr-3"></span> Ajouter</a></button>
-  <center><h1>All Programmes</h1></center>
-  <div class="btn_panier">
+    <button type="button" class="btn btn-primary btn-rounded" style="float: right;"><a href="{% url 'calender_new' %}"><span class="fa fa-users mr-3"></span> Ajouter</a></button><br><br>
+        <center>
+      <form class="form-inline my-2 my-lg-0" action="{% url 'calendar' %}" style="float: right;">
+          <input class="form-control mr-sm-2" type="search"   placeholder="Search" aria-label="Search" name="search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form> 
+      </center>
+      <center><h1>All Programmes</h1> <br></center>
+          
 	<div class="container">
   <div class="row">
     <div class="col-12">
       <table class="table table-bordered">
-        <thead>
+        <thead style="background-color: antiquewhite;">
           <tr>
+            <th scope="col">No</th>
             <th scope="col">Number</th>
             <th scope="col">Tenant</th>
             <th scope="col">Debut</th>
@@ -23,14 +30,15 @@
         <tbody>
           {% for cal in calender %}
           <tr>
+            <td>{{forloop.counter}}</td>
             <th scope="row">{{cal.office.num}}</th>
             <td>{{cal.locataire.first_name}} {{cal.locataire.last_name}}</td>
             <td>{{cal.start_rent_date}}</td>
             <td>{{cal.Paid_for_mounths|length}} mouths</td>
             <td>
-             <button type="button" class="btn btn-primary"><i class="fas fa-eye"></i></button>
+             <!-- <button type="button" class="btn btn-primary"><i class="fas fa-eye"></i></button> -->
               <button type="button" class="btn btn-success"><a href="/edit/{{cal.id}}"><i class="fas fa-edit"></i></a></button>
-              <button type="button" class="btn btn-success"><a href="/delete/{{ cal.id }}"><i class="fas fa-trash-alt"></i></a></button>
+              <button type="button" class="btn btn-danger"><a href="/delete/{{ cal.id }}"><i class="fas fa-trash-alt"></i></a></button>
             </td>
           </tr>
           {% endfor %}

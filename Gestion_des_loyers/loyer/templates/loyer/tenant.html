@@ -4,10 +4,15 @@
 {% load humanize %}
 {% block content %} 
 <div class="container">
-    <button type="button" class="btn btn-primary btn-rounded" style="float: right;"><a href="{% url 'tenant_new' %}"><span class="fa fa-users mr-3"></span> Ajouter</a></button>
+    <button type="button" class="btn btn-primary btn-rounded" style="float: right;"><a href="{% url 'tenant_new' %}"><span class="fa fa-users mr-3"></span> Ajouter</a></button><br><br>
         <center>
-        <h2>Mes locataires</h2><br>      
+      <form class="form-inline my-2 my-lg-0" action="{% url 'tenant' %}" style="float: right;">
+          <input class="form-control mr-sm-2" type="search"   placeholder="Search" aria-label="Search" name="search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form> 
       </center>
+      <center><h1>Mes locataires</h1>  <br></center>
+          
   <div class="btn_panier">
 	<div class="container">
   <div class="row">
@@ -15,6 +20,7 @@
       <table class="table table-bordered">
         <thead>
           <tr style="background-color: antiquewhite;">
+            <th scope="col">No</th>
             <th scope="col">Tenant</th>
             <!-- <th scope="col">Fin</th> -->
             <th scope="col">Contact</th>
@@ -26,6 +32,7 @@
         <tbody>
           {% for tenant in tenants %}
           <tr>
+            <td>{{forloop.counter}}</td>
             <td>{{tenant.first_name}} {{tenant.last_name}}</td>
             <!-- <td>{{tenant.office.num }}</td> -->
             <td>{{tenant.phone }}</td>
@@ -34,9 +41,9 @@
             <!-- <td>{{tenant.amount_inadvance|intcomma}}</td> -->
             <!-- <td>{{tenant.Paid_for_mounths|length}}</td> -->
             <td>
-              <button type="button" class="btn btn-primary"><i class="fas fa-eye"></i></button>
+              <!-- <button type="button" class="btn btn-primary"><i class="fas fa-eye"></i></button> -->
               <button type="button" class="btn btn-success"><a href="/edit_tenant/{{tenant.id}}"><i class="fas fa-edit"></i></a></button>
-              <button type="button" class="btn btn-success"><a href="/delete_tenant/{{ tenant.id }}"><i class="fas fa-trash-alt"></i></a></button>
+              <button type="button" class="btn btn-danger"><a href="/delete_tenant/{{ tenant.id }}"><i class="fas fa-trash-alt"></i></a></button>
             </td>
           </tr>
           {% endfor %}
