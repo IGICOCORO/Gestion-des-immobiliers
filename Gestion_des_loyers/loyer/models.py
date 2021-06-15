@@ -43,13 +43,14 @@ class Immeuble(models.Model):
 
 class Office(models.Model):
 	immeuble = models.ForeignKey(Immeuble, on_delete=models.CASCADE)
-	num = models.PositiveIntegerField(default=1)
+	num = models.PositiveIntegerField(default=1, unique = True)
 	picture = models.ImageField(upload_to='bureau/')	
 	picture1 = models.ImageField(upload_to='bureau/')
 	picture2 = models.ImageField(upload_to='bureau/')	
 	Houseownerjoinedthesite = models.DateTimeField(default=datetime.now,editable=True, blank=True)
 	rent_amount  = models.PositiveIntegerField(default=0)
-	is_available = models.BooleanField(default = False)
+	bordereaU = models.ImageField(upload_to='bordeau/')
+	is_available = models.BooleanField(default = True)
 
 	def was_published_recently(self):
 		now = timezone.now()
@@ -67,13 +68,20 @@ class Locataire(models.Model):
 	last_name = models.CharField(max_length=200)
 	phone = models.CharField(max_length=200)
 	address = models.CharField(max_length = 200)
+	contract = models.FileField(upload_to = 'contrat/')
+
+
+	class Meta:
+
+		ordering=('first_name',)
+
 
 	def __str__(self):
 		return f"{self.first_name} {self.last_name}"
 
 class Calender(models.Model):
 	locataire = models.ForeignKey(Locataire, on_delete=models.CASCADE)
-	office = models.ForeignKey(Office, on_delete=models.CASCADE)
+	office = models.OneToOneField(Office, on_delete=models.CASCADE)
 	start_rent_date = models.DateField('Agreement started', default=datetime.now,editable=True, blank=True)
 	end_rent_date = models.DateField('Agreement Ended', default=datetime.now,editable=True, blank=True)
 	deposit_by_renter = models.PositiveIntegerField(default=0, editable=True)
@@ -83,3 +91,5 @@ class Calender(models.Model):
 
 	def __str__(self):
 		return f'{self.locataire.first_name} {self.locataire.last_name}'
+	class Meta:
+		ordering = ('-office',)
