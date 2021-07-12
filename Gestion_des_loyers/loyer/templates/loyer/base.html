@@ -225,7 +225,7 @@
             </div>
                 <ul class="list-unstyled components mb-5">
                   <li class="active">
-                    <a href="{% url 'home' %}"><span class="fas fa-home"></span> Dashboard</a>
+                    <a href="{% url 'dashboard' %}"><span class="fas fa-home"></span> Dashboard</a>
                   </li>
                   <li>
                       <a href="{% url 'calendar' %}"><span class="fas fa-calendar"></span> Calendar</a>
@@ -235,6 +235,15 @@
                   </li>
                   <li>
                     <a href="{% url 'tenant' %}"><span class="fas fa-users"></span> Tenant</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'register' %}"><span class="fas fa-users"></span> Profile</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'edit_profile' %}"><span class="fas fa-users"></span> Edit Profile</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'change_password'  %}"><span class="fas fa-users"></span> Change Password</a>
                   </li>
                 </ul>
 
@@ -267,8 +276,8 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                               <li>
-                                <a href="{% url 'login' %} " class="text-white" ><span class="fas fa-sign-out-alt"></span>Sign Out</a>
-                                
+                                <a  href="{% url 'logout' %} "class="text-white" ><span class="fas fa-sign-out-alt"></span>Sign Out</a>
+
                               </li>
                            </ul>
                     </div>

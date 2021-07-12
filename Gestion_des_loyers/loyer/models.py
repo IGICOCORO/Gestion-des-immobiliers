@@ -21,35 +21,36 @@ Months_year = (
 				('Dec', 'December')
 			)  
 
+niveau = (
+			('1ere niveau', '1ere niveau'),
+			('2eme niveau', '2eme niveau'),
+			('3eme niveau', '3eme niveau'),
+			('4eme niveau', '4eme niveau'),
+	)
 
 
-class Proprietaire(models.Model):
-	user = models.OneToOneField(User,on_delete= models.CASCADE, related_name = 'proprietaires')
-	tel = models.PositiveIntegerField()
-	address = models.CharField(max_length=200)
-	
-	def __str__(self):
-		return f"{self.user.first_name} {self.user.last_name}"
 
-class Immeuble(models.Model):
-	Proprietaire = models.ForeignKey(Proprietaire, on_delete= models.PROTECT)
+# def ca
+class Immeuble(models.Model): 
 	address = models.CharField(max_length=40)
 	nbre_bureau = models.PositiveIntegerField()
 	image = models.ImageField(upload_to='imeuble/')
 
-
+# intrgrer le niveau de chaque bureau
 	def __str__(self):
-		return self.Proprietaire.user.username
+		return self.address
 
 class Office(models.Model):
+	
 	immeuble = models.ForeignKey(Immeuble, on_delete=models.CASCADE)
-	num = models.PositiveIntegerField(default=1, unique = True)
+	etage = models.CharField(max_length=20, choices = niveau)
 	picture = models.ImageField(upload_to='bureau/')	
+	num = models.PositiveIntegerField(default=1, unique = True)
 	picture1 = models.ImageField(upload_to='bureau/')
 	picture2 = models.ImageField(upload_to='bureau/')	
-	Houseownerjoinedthesite = models.DateTimeField(default=datetime.now,editable=True, blank=True)
+	Houseownerjoinedthesite = models.DateTimeField(default=datetime.now, blank=True)
 	rent_amount  = models.PositiveIntegerField(default=0)
-	bordereaU = models.ImageField(upload_to='bordeau/')
+	bordereau = models.ImageField(upload_to='bordeau/')
 	is_available = models.BooleanField(default = True)
 
 	def was_published_recently(self):
@@ -61,11 +62,13 @@ class Office(models.Model):
 	def __str__(self):
 		return f'{self.num}'
 
+
+	# defne nbre_bureau_notif au nombre
+
 	
 
 class Locataire(models.Model):
-	first_name = models.CharField(max_length=200)
-	last_name = models.CharField(max_length=200)
+	profile = models.OneToOneField(User, on_delete=models.CASCADE)
 	phone = models.CharField(max_length=200)
 	address = models.CharField(max_length = 200)
 	contract = models.FileField(upload_to = 'contrat/')
@@ -73,11 +76,11 @@ class Locataire(models.Model):
 
 	class Meta:
 
-		ordering=('first_name',)
+		ordering=('-profile',)
 
 
 	def __str__(self):
-		return f"{self.first_name} {self.last_name}"
+		return f"{self.profile.first_name} {self.profile.last_name}"
 
 class Calender(models.Model):
 	locataire = models.ForeignKey(Locataire, on_delete=models.CASCADE)
@@ -85,11 +88,25 @@ class Calender(models.Model):
 	start_rent_date = models.DateField('Agreement started', default=datetime.now,editable=True, blank=True)
 	end_rent_date = models.DateField('Agreement Ended', default=datetime.now,editable=True, blank=True)
 	deposit_by_renter = models.PositiveIntegerField(default=0, editable=True)
-	pay_inadvance = models.BooleanField()
+	pay_inadvance = models.BooleanField(default=False)
 	amount_inadvance = models.PositiveIntegerField()
 	Paid_for_mounths = MultiSelectField(choices=Months_year)
 
 	def __str__(self):
-		return f'{self.locataire.first_name} {self.locataire.last_name}'
+		return f'{self.locataire.user.first_name} {self.locataire.user.last_name}'
+
+
 	class Meta:
 		ordering = ('-office',)
+	# relation a payer entre le montant mensuel(deposit_by_renter) et l\'avance (amount_inadvance)
+
+	def get_montant(self):
+		pass
+
+	# def notification(self):
+	# 	if self.Paid_for_mounths.days -
+
+
+# CMS acces au locateurs
+
+# notification suivant les jrs restants par rapport au periode de location 5jrs

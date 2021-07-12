@@ -2,14 +2,8 @@ from django.contrib import admin
 from .models import *
 
 
-    
-class ProprietaireAdmin(admin.ModelAdmin):
-    fields = ['user', 'tel', 'address']
-admin.site.register(Proprietaire, ProprietaireAdmin)
-
-
 class ImmeubleAdmin(admin.ModelAdmin):
-    fields = ['Proprietaire', 'address', 'nbre_bureau']
+    fields = ['etage', 'address', 'nbre_bureau']
 admin.site.register(Immeuble, ImmeubleAdmin)
 
 class OfficeAdmin(admin.ModelAdmin):
