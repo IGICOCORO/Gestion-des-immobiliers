@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'crispy_forms',
+    'authenticate',
     'loyer',
 ]
 CRISPY_TEMPLATE_PACK = 'uni_form'
@@ -58,6 +59,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'Gestion_des_loyers.urls'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -73,6 +75,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'Gestion_des_loyers.wsgi.application'
 
@@ -130,4 +133,6 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS=[STATIC_DIR,]
 
+
 MEDIA_ROOT=os.path.join(BASE_DIR,'static')
+
