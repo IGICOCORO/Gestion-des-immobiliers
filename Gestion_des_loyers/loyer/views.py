@@ -3,11 +3,16 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from    .forms  import *
 from .models import *
+from django.contrib.auth.decorators import login_required,user_passes_test
 # new features
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+from django.contrib.auth.decorators import user_passes_test
 
+
+def is_locatire(user):
+	return user.groups.filter(name='LOCATAIRE').exists()
 
 @login_required 
 def dashboard(request):
@@ -25,14 +30,17 @@ def dashboard(request):
 
     return render(request,'loyer/index.html',{ 'listing': listing })
 
-@login_required 
+@login_required(login_url='is_locatire') 
 def office(request):
-	tenants = Locataire.objects.all()
+	tenants = Locataire.objects.get(user_id=request.user.id)
 	offices = Office.objects.all()
 	context = {'offices': offices, 'tenants':tenants}
 	return render(request,'loyer/office.html',context)
 
-@login_required 
+# @login_required(login_url='is_superuser') 
+@login_required
+# @user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser)
 def tenant(request):
 	# tenants = Locataire.objects.all()
 	# context = { 'tenants': tenants}
@@ -43,11 +51,11 @@ def tenant(request):
 		context = { 'tenants': tenants}
 	else:
 	# If not searched, return default tenants
-		tenants =Locataire.objects.all()#.order_by("-date_created")
+		tenants =Locataire.objects.order_by("-id")
 		context = { 'tenants': tenants}
 	return render(request,'loyer/tenant.html', context)
 
-@login_required 
+@login_required(login_url='is_locatire') 
 def calendar(request):
 	search_post = request.GET.get('search')
 	if search_post:
@@ -55,7 +63,7 @@ def calendar(request):
 		context = { 'calender': calender}
 	else:
 	# If not searched, return default tenants
-		tenants =calender = Calender.objects.all()#.order_by("-date_created")
+		tenants =calender = Calender.objects.order_by("-id")
 		context = { 'calender': calender}
 	return render(request,'loyer/calendar.html',context)
 

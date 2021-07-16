@@ -4,6 +4,8 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
 from multiselectfield import MultiSelectField
+from django.utils import timezone
+from datetime import date, timedelta, datetime
 
 # Create your models here.
 Months_year = ( 
@@ -30,7 +32,10 @@ niveau = (
 
 
 
-# def ca
+# Create your models here.
+def thirtyDays():
+	return date.today()+timedelta(days=30)
+
 class Immeuble(models.Model): 
 	address = models.CharField(max_length=40)
 	nbre_bureau = models.PositiveIntegerField()
@@ -68,7 +73,7 @@ class Office(models.Model):
 	
 
 class Locataire(models.Model):
-	profile = models.OneToOneField(User, on_delete=models.CASCADE)
+	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	phone = models.CharField(max_length=200)
 	address = models.CharField(max_length = 200)
 	contract = models.FileField(upload_to = 'contrat/')
@@ -76,17 +81,17 @@ class Locataire(models.Model):
 
 	class Meta:
 
-		ordering=('-profile',)
+		ordering=('-user',)
 
 
 	def __str__(self):
-		return f"{self.profile.first_name} {self.profile.last_name}"
+		return f"{self.user.first_name} {self.user.last_name}"
 
 class Calender(models.Model):
 	locataire = models.ForeignKey(Locataire, on_delete=models.CASCADE)
 	office = models.OneToOneField(Office, on_delete=models.CASCADE)
-	start_rent_date = models.DateField('Agreement started', default=datetime.now,editable=True, blank=True)
-	end_rent_date = models.DateField('Agreement Ended', default=datetime.now,editable=True, blank=True)
+	start_rent_date = models.DateTimeField('Agreement started', default=thirtyDays, blank=True)
+	# end_rent_date = models.DateTimeField('Agreement Ended', default=datetime.now,editable=True, blank=True)
 	deposit_by_renter = models.PositiveIntegerField(default=0, editable=True)
 	pay_inadvance = models.BooleanField(default=False)
 	amount_inadvance = models.PositiveIntegerField()
@@ -100,11 +105,15 @@ class Calender(models.Model):
 		ordering = ('-office',)
 	# relation a payer entre le montant mensuel(deposit_by_renter) et l\'avance (amount_inadvance)
 
-	def get_montant(self):
-		pass
+	# def get_montant(self):
 
-	# def notification(self):
-	# 	if self.Paid_for_mounths.days -
+
+	# def save(self, *args, **kwargs):
+	# 	super().save(*args, **kwargs)
+	# 	deposit_by_renter = self.deposit_by_renter
+	# 	rent_amount.office  -= self.rent_amount
+	# 	deposit_by_renter.save()
+
 
 
 # CMS acces au locateurs

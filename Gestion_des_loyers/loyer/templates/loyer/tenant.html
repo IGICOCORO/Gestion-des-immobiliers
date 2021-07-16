@@ -33,7 +33,7 @@
           {% for tenant in tenants %}
           <tr>
             <td>{{forloop.counter}}</td>
-            <td>{{tenant.first_name}} {{tenant.last_name}}</td>
+            <td>{{tenant.user.first_name}} {{tenant.user.last_name}}</td>
             <!-- <td>{{tenant.office.num }}</td> -->
             <td>{{tenant.phone }}</td>
             <!-- <td>{{tenant.end_rent_date}}</td> -->

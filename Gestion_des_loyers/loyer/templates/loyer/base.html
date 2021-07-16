@@ -219,15 +219,22 @@
             <div id="dismiss">
                 <i class="fas fa-arrow-left"></i>
             </div>
+            <br><br>
+            <div>
+                <center>
+                 <a  href="# "class="text-white" style=""><span class="fas fa-user"></span>{{user.username}}</a>
+                </center>
+            </div>
 
             <div class="sidebar-header">
                 <h3>Gestion des Loyers</h3>
             </div>
+                {%if request.user.is_superuser%}
                 <ul class="list-unstyled components mb-5">
                   <li class="active">
                     <a href="{% url 'dashboard' %}"><span class="fas fa-home"></span> Dashboard</a>
                   </li>
-                  <li>
+                  <li >
                       <a href="{% url 'calendar' %}"><span class="fas fa-calendar"></span> Calendar</a>
                   </li>
                   <li>
@@ -235,6 +242,14 @@
                   </li>
                   <li>
                     <a href="{% url 'tenant' %}"><span class="fas fa-users"></span> Tenant</a>
+                  </li>
+                    
+                </ul>
+
+                {%else%}
+                <ul class="list-unstyled components mb-5">
+                  <li class="active">
+                    <a href="{% url 'dashboard' %}"><span class="fas fa-home"></span> Dashboard</a>
                   </li>
                   <li>
                     <a href="{% url 'register' %}"><span class="fas fa-users"></span> Profile</a>
@@ -246,6 +261,7 @@
                     <a href="{% url 'change_password'  %}"><span class="fas fa-users"></span> Change Password</a>
                   </li>
                 </ul>
+            {% endif%}
 
             <ul class="list-unstyled CTAs">
         <div style="color:#ffffff;" class="wow fadeInUp footer-copyright">
@@ -279,7 +295,7 @@
                                 <a  href="{% url 'logout' %} "class="text-white" ><span class="fas fa-sign-out-alt"></span>Sign Out</a>
 
                               </li>
-                           </ul>
+                            </ul>
                     </div>
                 </div>
             </nav>

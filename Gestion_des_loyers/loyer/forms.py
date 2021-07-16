@@ -15,7 +15,7 @@ class OfficeForm(forms.ModelForm):
 class LocataireForm(forms.ModelForm):
 	class Meta:
 		model = Locataire
-		fields = ('phone', 'address','contract')
+		fields = ('user','phone', 'address','contract')
 		
 
 

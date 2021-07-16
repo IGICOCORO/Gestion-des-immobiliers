@@ -1,35 +1,31 @@
-{% block content %}
-
-<h2 class="text-center">Register</h2>
-
-<div class="col-md-6 offset-md-3">
-	<form method="POST" action="{% url 'register' %}">
-		{% csrf_token %}
-
-		{% if form.errors %}
-			<div class="alert alert-warning alert-dismissable" role="alert">
-            <button class="close" data-dismiss="alert">
-                    <small><sup>x</sup></small>
-                </button>
-            <p>Your Form Has Errors...</p>
-            {% for field in form %}
-            	{% if field.errors  %}
-            		{{ field.errors }}
-            	{% endif %}
-
-            {% endfor %}
-
-          </div>
-
-
-		{% endif %}
-		
-       
-			{{ form.as_p }}
-
-		<input type="submit" value="Register" class="btn btn-secondary">
-	</form>
-</div>
-<br/><br/>
-{% endblock %}
-
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+    <link href="{% static "style.css" %}" rel="stylesheet">
+    <title>Sign in & Sign up Form</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="forms-container">
+        <div class="signin-signup">
+              {% if registered %}
+                <h1>Thank you for registering!</h1>
+              {% else %}
+                <h1>Register Here</h1>
+                <h3>Just fill out the form.</h3>
+              <form enctype="multipart/form-data" method="POST">
+                {% csrf_token %}
+                {{ user_form.as_p }}
+            {{ profile_form.as_p }}
+            <input type="submit" name="" value="Register">
+            </form>
+              {% endif%}
+  </body>
+</html>
