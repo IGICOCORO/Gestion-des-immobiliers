@@ -108,11 +108,11 @@ class Calender(models.Model):
 	# def get_montant(self):
 
 
-	# def save(self, *args, **kwargs):
-	# 	super().save(*args, **kwargs)
-	# 	deposit_by_renter = self.deposit_by_renter
-	# 	rent_amount.office  -= self.rent_amount
-	# 	deposit_by_renter.save()
+	def save(self, *args, **kwargs):
+		super().save(*args, **kwargs)
+		deposit_by_renter = self.deposit_by_renter
+		rent_amount.office  -= self.rent_amount
+		deposit_by_renter.save()
 
 
 
